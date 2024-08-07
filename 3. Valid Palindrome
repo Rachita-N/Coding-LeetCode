@@ -1,0 +1,20 @@
+class Solution 
+{
+    public boolean isPalindrome(String s) 
+    {
+        s=s.trim();
+        String a="",ns="";
+        for(int i=s.length()-1;i>=0;i--)
+        {
+           char ch=s.charAt(i);
+            if(Character.isLetterOrDigit(ch))
+                a=a+Character.toLowerCase(ch);
+        }
+        for (int i=0; i<a.length(); i++)
+       {
+        char ch1= a.charAt(i); //extracts each character
+        ns= ch1+ns; //adds each character in front of the existing string
+       }
+     return ns.equals(a);
+    }
+}
