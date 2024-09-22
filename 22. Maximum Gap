@@ -1,0 +1,51 @@
+class Solution {
+    public int maximumGap(int[] nums) {
+        if (nums.length < 2) {
+            return 0;
+        }
+
+        // Find the minimum and maximum values in the array
+        int minVal = Integer.MAX_VALUE;
+        int maxVal = Integer.MIN_VALUE;
+        for (int num : nums) {
+            minVal = Math.min(minVal, num);
+            maxVal = Math.max(maxVal, num);
+        }
+        if (minVal == maxVal) {
+            return 0;
+        }
+
+        // Calculate the size of each bucket
+        int bucketSize = Math.max(1, (maxVal - minVal) / (nums.length - 1));
+
+        // Calculate the number of buckets needed
+        int numBuckets = (maxVal - minVal) / bucketSize + 1;
+
+        // Initialize buckets with default values
+        int[][] buckets = new int[numBuckets][2];
+        for (int i = 0; i < numBuckets; i++) {
+            buckets[i][0] = Integer.MAX_VALUE;
+            buckets[i][1] = Integer.MIN_VALUE;
+        }
+
+        // Fill the buckets with elements from the array
+        for (int num : nums) {
+            int index = (num - minVal) / bucketSize;
+            buckets[index][0] = Math.min(buckets[index][0], num);
+            buckets[index][1] = Math.max(buckets[index][1], num);
+        }
+
+        // Calculate the maximum difference between consecutive non-empty buckets
+        int maxGap = 0;
+        int prevMax = minVal;
+        for (int[] bucket : buckets) {
+            if (bucket[0] == Integer.MAX_VALUE && bucket[1] == Integer.MIN_VALUE) {
+                continue;
+            }
+            maxGap = Math.max(maxGap, bucket[0] - prevMax);
+            prevMax = bucket[1];
+        }
+
+        return maxGap;
+    }
+}
