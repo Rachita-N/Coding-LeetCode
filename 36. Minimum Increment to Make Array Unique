@@ -1,0 +1,19 @@
+class Solution {
+    public int minIncrementForUnique(int[] nums) {
+        int i,j,tmp,c=0,it;
+        Arrays.sort(nums);
+        
+         for(i=1;i<nums.length;i++)
+        {
+             if(nums[i-1]>=nums[i])
+             {
+                 it=nums[i-1]-nums[i]+1;
+                 nums[i]+=it;
+                 c=c+it;
+             }
+             else
+                 continue;
+         }
+        return c;
+    }
+}
