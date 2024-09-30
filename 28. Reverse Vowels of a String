@@ -1,0 +1,28 @@
+class Solution {
+    public String reverseVowels(String s) {
+        //using 2 pointers technique
+        char[] CA=s.toCharArray();
+        int l=0,r=CA.length-1;
+        String vowel="aeiouAEIOU";
+        while(l<r)
+        {
+            while(l<r && vowel.indexOf(CA[l])==-1)
+            {
+                l++;
+            }
+            while(l<r && vowel.indexOf(CA[r])==-1)
+            {
+               r--; 
+            } 
+            char temp=CA[l];
+            CA[l]=CA[r];
+            CA[r]=temp;
+            
+            l++;
+            r--;   
+        }
+        return new String(CA);
+        
+    }
+    
+}
