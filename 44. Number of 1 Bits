@@ -1,0 +1,12 @@
+class Solution {
+    public int hammingWeight(int n) {
+        String result = Integer.toBinaryString(n);
+        int k=0;
+        for(char ch:result.toCharArray())
+        {
+            if(ch!='0')
+                k++;
+        }
+        return k;
+    }
+}
